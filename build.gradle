@@ -1,0 +1,106 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+        
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+//        maven { url "https://raw.githubusercontent.com/AudienL/repos/master" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task helloTask{
+    println 'i am helloTask'
+//    doFirst{
+//        println 'the task group is:'+group
+//    }
+//    doFirst{
+//
+//    }
+}
+helloTask.doFirst{
+    println 'Hello Venus'
+}
+helloTask.doLast{
+    println 'Hello Mars'
+}
+helloTask << {
+    println 'Hello Jupiter'
+}
+//
+//helloTask.doFirst{
+//    println 'the task description is:'+description
+//}
+//
+//this.tasks.create(name:'helloTask2'){
+//    println 'i am helloTask 2.'
+//}
+//
+//task count <<{
+//    4.times {println "$it"}
+//}
+
+task intro(dependsOn: helloTask)<<{
+    println "I'm Gradle"
+}
+
+4.times{counter->
+    task "task$counter"<<{
+        println "I'm task number $counter"
+    }
+}
+task1.dependsOn task2,task3
+
+
+task myTask{
+    ext.myProperty = "myValue"
+}
+task printTaskProperties << {
+    println myTask.myProperty
+}
+
+
+//task loadfile << {
+//    def files = file('../antLoadfileResources').listFiles().sort()
+//    files.each { File file ->
+//        if (file.isFile()) {
+//            ant.loadfile(srcFile: file, property: file.name)
+//            println " *** $file.name ***"
+//            println "${ant.properties[file.name]}"
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
